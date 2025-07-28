@@ -34,15 +34,10 @@ jobs:
         npm run build
         
     - name: Restore .NET dependencies
-      run: dotnet restore
+      run: dotnet restore MyTradeBuddy.sln
       
-    - name: Build .NET app
-      run: |
-        # Build .NET Backend
-        - name: Build .NET Backend
-          run: |
-            dotnet restore MyTradeBuddy.sln
-            dotnet build MyTradeBuddy.sln --configuration Release --no-restore
+    - name: Build .NET Backend
+      run: dotnet build MyTradeBuddy.sln --configuration Release --no-restore
       
     - name: Publish .NET app
       run: dotnet publish MyTradeBuddy.Web/MyTradeBuddy.Web.csproj --configuration Release --output ./publish --no-build

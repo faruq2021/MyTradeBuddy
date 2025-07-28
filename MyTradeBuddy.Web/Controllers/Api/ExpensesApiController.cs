@@ -36,24 +36,11 @@ namespace MyTradeBuddy.Web.Controllers.Api
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return Unauthorized();
 
-            var expense = await _expenseService.GetExpenseByIdAsync(id);
-            if (expense == null || expense.UserId != user.Id)
+            var expense = await _expenseService.GetExpenseByIdAsync(id, user.Id); // Add user.Id parameter
+            if (expense == null)
                 return NotFound();
 
             return Ok(expense);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Expense>> CreateExpense(Expense expense)
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return Unauthorized();
-
-            expense.UserId = user.Id;
-            expense.ExpenseDate = expense.ExpenseDate == default ? DateTime.Now : expense.ExpenseDate;
-
-            var createdExpense = await _expenseService.CreateExpenseAsync(expense);
-            return CreatedAtAction(nameof(GetExpense), new { id = createdExpense.Id }, createdExpense);
         }
 
         [HttpPut("{id}")]
@@ -62,8 +49,8 @@ namespace MyTradeBuddy.Web.Controllers.Api
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return Unauthorized();
 
-            var existingExpense = await _expenseService.GetExpenseByIdAsync(id);
-            if (existingExpense == null || existingExpense.UserId != user.Id)
+            var existingExpense = await _expenseService.GetExpenseByIdAsync(id, user.Id); // Add user.Id parameter
+            if (existingExpense == null)
                 return NotFound();
 
             expense.Id = id;
@@ -78,11 +65,11 @@ namespace MyTradeBuddy.Web.Controllers.Api
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return Unauthorized();
 
-            var expense = await _expenseService.GetExpenseByIdAsync(id);
-            if (expense == null || expense.UserId != user.Id)
+            var expense = await _expenseService.GetExpenseByIdAsync(id, user.Id); // Add user.Id parameter
+            if (expense == null)
                 return NotFound();
 
-            await _expenseService.DeleteExpenseAsync(id);
+            await _expenseService.DeleteExpenseAsync(id, user.Id); // Add user.Id parameter
             return NoContent();
         }
 

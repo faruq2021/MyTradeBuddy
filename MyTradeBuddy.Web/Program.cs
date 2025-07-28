@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI; // Add this line
 using Microsoft.EntityFrameworkCore;
 using MyTradeBuddy.Core.Entities;
 using MyTradeBuddy.Core.Interfaces;

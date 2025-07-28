@@ -72,5 +72,15 @@ namespace MyTradeBuddy.Infrastructure.Services
                 .OrderByDescending(e => e.ExpenseDate)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Expense>> GetExpensesByUserIdAsync(string userId)
+        {
+            return await GetAllExpensesAsync(userId); // Reuse existing method
+        }
+
+        public async Task<decimal> GetTotalExpensesByUserIdAsync(string userId)
+        {
+            return await GetTotalExpensesAsync(userId); // Reuse existing method
+        }
     }
 }

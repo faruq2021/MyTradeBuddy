@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -37,7 +37,7 @@ const ExpenseForm = () => {
 
     const paymentMethods = ['Cash', 'Bank Transfer', 'Card', 'Mobile Money', 'Cheque'];
 
-    const fetchExpense = async () => {
+    const fetchExpense = useCallback(async () => {
         try {
             setLoading(true);
             const response = await axios.get(`/api/expenses/${id}`);
@@ -52,14 +52,13 @@ const ExpenseForm = () => {
         } finally {
             setLoading(false);
         }
-    };
-
-    // Around line 44, find the useEffect and add fetchExpense to the dependency array
+    }, [id, navigate]);
+    
     useEffect(() => {
         if (isEdit) {
             fetchExpense();
         }
-    }, [id, isEdit, fetchExpense]); // Add fetchExpense to dependencies
+    }, [isEdit, fetchExpense]);
 
     const validateForm = () => {
         const newErrors = {};

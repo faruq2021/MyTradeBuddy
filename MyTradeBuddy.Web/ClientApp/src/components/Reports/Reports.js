@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { Bar, Pie } from 'react-chartjs-2';
@@ -28,7 +28,7 @@ const Reports = () => {
         fetchReportData();
     }, [dateRange, fetchReportData]); // Add fetchReportData to dependencies
 
-    const fetchReportData = async () => {
+    const fetchReportData = useCallback(async () => {
         try {
             setLoading(true);
             
@@ -85,7 +85,7 @@ const Reports = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [dateRange]);
 
     const getSalesByMonth = (sales) => {
         const monthlyData = {};

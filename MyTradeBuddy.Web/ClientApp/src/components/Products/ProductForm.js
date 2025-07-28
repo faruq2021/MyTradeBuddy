@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Form, Button, Card, Row, Col, Alert } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -22,36 +22,34 @@ const ProductForm = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  // Around line 25, add fetchProduct to the dependency array
+  const fetchProduct = useCallback(async () => {
+      try {
+          setLoading(true);
+          const response = await axios.get(`/api/products/${id}`);
+          const product = response.data;
+          setFormData({
+              name: product.name,
+              description: product.description,
+              category: product.category,
+              costPrice: product.costPrice.toString(),
+              sellingPrice: product.sellingPrice.toString(),
+              stockQuantity: product.stockQuantity.toString(),
+              minimumStockLevel: product.minimumStockLevel.toString(),
+              unit: product.unit
+          });
+      } catch (error) {
+          toast.error('Failed to fetch product details');
+          navigate('/products');
+      } finally {
+          setLoading(false);
+      }
+  }, [id, navigate]);
+  
   useEffect(() => {
       if (isEdit) {
           fetchProduct();
       }
-  }, [id, isEdit, fetchProduct]); // Add fetchProduct to dependencies
-
-  const fetchProduct = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`/api/products/${id}`);
-      const product = response.data;
-      setFormData({
-        name: product.name,
-        description: product.description,
-        category: product.category,
-        costPrice: product.costPrice.toString(),
-        sellingPrice: product.sellingPrice.toString(),
-        stockQuantity: product.stockQuantity.toString(),
-        minimumStockLevel: product.minimumStockLevel.toString(),
-        unit: product.unit
-      });
-    } catch (error) {
-      console.error('Error fetching product:', error);
-      toast.error('Failed to load product');
-      navigate('/products');
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [isEdit, fetchProduct]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

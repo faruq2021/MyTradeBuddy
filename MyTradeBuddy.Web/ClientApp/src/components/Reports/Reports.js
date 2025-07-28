@@ -23,11 +23,7 @@ const Reports = () => {
         recentTransactions: []
     });
 
-    // Around line 26, add fetchReportData to the dependency array
-    useEffect(() => {
-        fetchReportData();
-    }, [dateRange, fetchReportData]); // Add fetchReportData to dependencies
-
+    // Move fetchReportData function BEFORE useEffect
     const fetchReportData = useCallback(async () => {
         try {
             setLoading(true);
@@ -86,6 +82,11 @@ const Reports = () => {
             setLoading(false);
         }
     }, [dateRange]);
+
+    // Now useEffect can safely call fetchReportData
+    useEffect(() => {
+        fetchReportData();
+    }, [fetchReportData]);
 
     const getSalesByMonth = (sales) => {
         const monthlyData = {};

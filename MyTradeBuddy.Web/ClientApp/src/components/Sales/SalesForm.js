@@ -47,7 +47,7 @@ const SalesForm = () => {
   // Add this comment above the function
   // eslint-disable-next-line no-unused-vars
   const handleAddProduct = (product) => {
-      setSelectedProduct(product);
+      sdoesetSelectedProduct(product);
       setItemQuantity(1);
       setShowProductModal(true);
   };

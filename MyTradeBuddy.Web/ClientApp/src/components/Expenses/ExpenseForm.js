@@ -37,12 +37,6 @@ const ExpenseForm = () => {
 
     const paymentMethods = ['Cash', 'Bank Transfer', 'Card', 'Mobile Money', 'Cheque'];
 
-    useEffect(() => {
-        if (isEdit) {
-            fetchExpense();
-        }
-    }, [id, isEdit]);
-
     const fetchExpense = async () => {
         try {
             setLoading(true);
@@ -59,6 +53,12 @@ const ExpenseForm = () => {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (isEdit) {
+            fetchExpense();
+        }
+    }, [id, isEdit, fetchExpense]);
 
     const validateForm = () => {
         const newErrors = {};

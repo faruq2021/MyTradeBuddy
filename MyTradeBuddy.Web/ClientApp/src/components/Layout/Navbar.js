@@ -76,20 +76,20 @@ const Navbar = () => {
                     
                     <ul className="navbar-nav">
                         <li className="nav-item dropdown">
-                            <a 
-                                className="nav-link dropdown-toggle" 
-                                href="#" 
-                                role="button" 
+                            <button 
+                                className="nav-link dropdown-toggle btn btn-link" 
+                                type="button"
                                 data-bs-toggle="dropdown"
+                                style={{ border: 'none', background: 'none', color: 'inherit' }}
                             >
                                 <i className="fas fa-user me-1"></i>
                                 Account
-                            </a>
+                            </button>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Profile</a></li>
-                                <li><a className="dropdown-item" href="#">Settings</a></li>
+                                <li><button className="dropdown-item" type="button">Profile</button></li>
+                                <li><button className="dropdown-item" type="button">Settings</button></li>
                                 <li><hr className="dropdown-divider" /></li>
-                                <li><a className="dropdown-item" href="#">Logout</a></li>
+                                <li><button className="dropdown-item" type="button">Logout</button></li>
                             </ul>
                         </li>
                     </ul>

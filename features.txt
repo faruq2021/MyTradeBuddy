@@ -1,0 +1,51 @@
+# MyTradeBuddy - AI-Powered Microbusiness Helper
+> "Helping Nigerian small business owners manage money, track sales, and grow smarter — with AI."
+
+## 🎯 PROJECT OVERVIEW
+- Target: Nigerian informal economy traders
+- Focus: Financial management + AI business insights
+- Deployment: Azure Cloud (App Service + Azure SQL Database)
+- Architecture: ASP.NET Core 8 MVC + React Frontend
+
+## 📱 CORE FEATURES (MVP)
+
+### User Management
+- [x] User Registration & Authentication (JWT)
+- [x] Profile Management
+- [x] Role-based Access (Customer/Admin)
+
+### Financial Tracking
+- [x] Record Sales (item, quantity, price, date)
+- [x] Record Expenses (category, amount, description)
+- [x] Daily/Weekly/Monthly Profit Calculations
+- [x] Transaction History with Search/Filter
+
+### Inventory Management
+- [x] Add/Update Product Stock
+- [x] Low Stock Alerts
+- [x] Product Performance Tracking
+- [x] Stock Valuation Reports
+
+### Reporting & Analytics
+- [x] Daily Summary Reports
+- [x] Weekly Business Performance
+- [x] Best/Worst Selling Products
+- [x] Expense Category Breakdown
+- [x] Profit Trend Analysis
+
+### AI Business Advisor
+- [x] Contextual Business Advice (OpenAI GPT-4)
+- [x] Expense Optimization Suggestions
+- [x] Sales Strategy Recommendations
+- [x] Multilingual Support (English, Pidgin, Yoruba, Hausa, Igbo)
+
+### Additional Features
+- [x] Data Export (CSV/PDF)
+- [x] Backup & Restore
+- [x] Mobile-Responsive Design
+- [ ] WhatsApp Bot Integration (Phase 2)
+- [ ] Voice-to-Text Input (Phase 2)
+
+## 🏗️ TECHNICAL ARCHITECTURE
+
+### Backend (.NET 8 MVC)

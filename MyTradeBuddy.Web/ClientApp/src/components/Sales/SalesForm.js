@@ -44,10 +44,12 @@ const SalesForm = () => {
     }));
   };
 
+  // Add this comment above the function
+  // eslint-disable-next-line no-unused-vars
   const handleAddProduct = (product) => {
-    setSelectedProduct(product);
-    setItemQuantity(1);
-    setShowProductModal(true);
+      setSelectedProduct(product);
+      setItemQuantity(1);
+      setShowProductModal(true);
   };
 
   const handleConfirmAddProduct = () => {

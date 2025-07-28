@@ -23,9 +23,10 @@ const Reports = () => {
         recentTransactions: []
     });
 
+    // Around line 26, add fetchReportData to the dependency array
     useEffect(() => {
         fetchReportData();
-    }, [dateRange]);
+    }, [dateRange, fetchReportData]); // Add fetchReportData to dependencies
 
     const fetchReportData = async () => {
         try {

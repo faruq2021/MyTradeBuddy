@@ -22,11 +22,12 @@ const ProductForm = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Around line 25, add fetchProduct to the dependency array
   useEffect(() => {
-    if (isEdit) {
-      fetchProduct();
-    }
-  }, [id, isEdit]);
+      if (isEdit) {
+          fetchProduct();
+      }
+  }, [id, isEdit, fetchProduct]); // Add fetchProduct to dependencies
 
   const fetchProduct = async () => {
     try {

@@ -54,11 +54,12 @@ const ExpenseForm = () => {
         }
     };
 
+    // Around line 44, find the useEffect and add fetchExpense to the dependency array
     useEffect(() => {
         if (isEdit) {
             fetchExpense();
         }
-    }, [id, isEdit, fetchExpense]);
+    }, [id, isEdit, fetchExpense]); // Add fetchExpense to dependencies
 
     const validateForm = () => {
         const newErrors = {};

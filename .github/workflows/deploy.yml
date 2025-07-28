@@ -37,7 +37,12 @@ jobs:
       run: dotnet restore
       
     - name: Build .NET app
-      run: dotnet build --configuration Release --no-restore
+      run: |
+        # Build .NET Backend
+        - name: Build .NET Backend
+          run: |
+            dotnet restore MyTradeBuddy.sln
+            dotnet build MyTradeBuddy.sln --configuration Release --no-restore
       
     - name: Publish .NET app
       run: dotnet publish MyTradeBuddy.Web/MyTradeBuddy.Web.csproj --configuration Release --output ./publish --no-build

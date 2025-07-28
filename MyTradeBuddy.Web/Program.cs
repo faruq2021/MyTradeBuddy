@@ -76,4 +76,7 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+// Add this before app.Run():
+app.MapFallbackToFile("index.html");
+
 app.Run();

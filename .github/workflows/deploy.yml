@@ -1,0 +1,50 @@
+name: Deploy MyTradeBuddy to Azure
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install React dependencies
+      run: |
+        cd MyTradeBuddy.Web/ClientApp
+        npm install
+        
+    - name: Build React app
+      run: |
+        cd MyTradeBuddy.Web/ClientApp
+        npm run build
+        
+    - name: Restore .NET dependencies
+      run: dotnet restore
+      
+    - name: Build .NET app
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Publish .NET app
+      run: dotnet publish MyTradeBuddy.Web/MyTradeBuddy.Web.csproj --configuration Release --output ./publish --no-build
+      
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'MyTradeBuddy'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ./publish
